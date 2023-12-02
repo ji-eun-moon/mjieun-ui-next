@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "next lint",
     "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build"
+    "build-storybook": "storybook build",
+    "chromatic": "npx chromatic --project-token=chpt_dc0a13f0fb375c2"
   },
   "dependencies": {
     "@types/node": "20.10.2",
@@ -33,7 +34,10 @@
     "@storybook/nextjs": "^7.6.3",
     "@storybook/react": "^7.6.3",
     "@storybook/test": "^7.6.3",
+    "chromatic": "^10.0.0",
     "eslint-plugin-storybook": "^0.6.15",
     "storybook": "^7.6.3"
-  }
+  },
+  "readme": "ERROR: No README data found!",
+  "_id": "storybook@0.1.0"
 }
