@@ -1,0 +1,38 @@
+import { Meta } from "@storybook/blocks";
+import Image from "next/image";
+import Github from "./assets/github.svg";
+
+<Meta title="Welcome" />
+
+<div className="sb-container">
+  <div className="sb-section-title">
+
+    # Welcome Jieun Design System
+
+  </div>
+    <a className="sb-contact" href="https://github.com/ji-eun-moon" target='_blank'>
+    <Image
+        width={32}
+        height={32}
+        layout="fixed"
+        src={Github}
+        alt="Github logo"
+        className="sb-explore-image"
+    />
+    <p>@ji-eun-moon</p>
+    </a>
+</div>
+
+<style>
+  {`
+  .sb-container {
+    margin-bottom: 48px;
+  }
+  .sb-contact {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    width: fit-content;
+  }
+`}
+</style>
