@@ -45,6 +45,9 @@ module.exports = {
           ...generateColors("#343a40"),
         },
       },
+      transitionDuration: {
+        350: "350ms",
+      },
     },
   },
   plugins: [],
