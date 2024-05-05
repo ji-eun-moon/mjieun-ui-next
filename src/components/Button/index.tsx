@@ -1,6 +1,6 @@
 import React from "react";
-import Icon from "../Icon/Icon";
-import { Color } from "@/types/color";
+import Icon from "../Icon";
+import { Color } from "@/types/themes/color";
 
 type Style = {
   solid: {
