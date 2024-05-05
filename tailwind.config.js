@@ -14,7 +14,9 @@ module.exports = {
     "./src/pages/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
+    "./src/stories/**/*.{js,jsx,ts,tsx}",
   ],
+  darkMode: ["class", '[data-mode="dark"]'],
   theme: {
     extend: {
       colors: {
