@@ -37,13 +37,13 @@ function HomePage() {
           placeholder="지역을 선택해주세요."
         />
       </div>
-      {/* <MultiSelect
+      <MultiSelect
         options={options}
         selected={selected}
         onChange={setSelected}
         placeholder="지역을 선택해주세요."
         search
-      /> */}
+      />
       <Segment
         items={[
           { id: "1", name: "Tab 1", content: "Content 1" },

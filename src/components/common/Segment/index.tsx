@@ -25,26 +25,28 @@ export default function Segment({ items }: Props) {
   }, [selected]);
 
   return (
-    <div>
-      <div className="border-b border-gray-300">
+    <div className="flex flex-col gap-4">
+      <div className="border-b border-gray-200">
         <ul className="list-none p-0 m-0 relative">
           {items.map((item) => (
             <li
               key={item.id}
               ref={selected.id === item.id ? activeRef : null}
-              className={`inline-block px-4 py-2 cursor-pointer`}
+              className={`inline-block px-4 py-2 cursor-pointer ${
+                selected.id === item.id ? "text-primary" : ""
+              }`}
               onClick={() => setSelected(item)}
             >
               {item.name}
             </li>
           ))}
         </ul>
+        <div
+          className="h-1 bg-primary-500 transition-all duration-[350ms] ease-in-out"
+          style={{ width: `${width}px`, transform: `translateX(${offset}px)` }}
+        />
       </div>
-      <div
-        className="h-3 bg-gray-500 transition-all duration-[350ms] ease-in-out"
-        style={{ width: `${width}px`, transform: `translateX(${offset}px)` }}
-      />
-      {selected.content}
+      <div>{selected.content}</div>
     </div>
   );
 }

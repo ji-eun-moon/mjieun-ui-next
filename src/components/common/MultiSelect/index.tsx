@@ -70,6 +70,7 @@ export default function MultiSelect({
       : [...selected, item.value];
 
     onChange(updatedSelection);
+    setSearchText("");
     event.stopPropagation();
   };
 
