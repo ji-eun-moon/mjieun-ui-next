@@ -57,10 +57,10 @@ export default function Select({
     onChange(option.value);
     setIsOpen(false);
     setSearchText(option.label);
-    console.log(selected, option.value, "here");
   };
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     if (!disabled) {
       setIsOpen(!isOpen);
     }

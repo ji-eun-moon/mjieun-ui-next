@@ -42,7 +42,6 @@ function HomePage() {
         selected={selected}
         onChange={setSelected}
         placeholder="지역을 선택해주세요."
-        search
       />
       <Segment
         items={[

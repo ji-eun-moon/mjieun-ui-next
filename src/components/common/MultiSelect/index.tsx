@@ -1,6 +1,5 @@
 "use client";
-
-import React, { useState } from "react";
+import { useEffect, useState } from "react";
 import Icon from "../Icon";
 import classNames from "classnames";
 import { useOutsideClick } from "@/hooks/useOutsideClick";
@@ -53,9 +52,14 @@ export default function MultiSelect({
     setIsOpen(false);
   });
 
-  const toggleDropdown = () => {
-    if (!disabled) {
-      setIsOpen(!isOpen);
+  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (search) {
+      setIsOpen(true);
+    } else {
+      if (!disabled) {
+        setIsOpen(!isOpen);
+      }
     }
   };
 
@@ -137,7 +141,7 @@ export default function MultiSelect({
         <input
           type="text"
           placeholder={placeholder}
-          className="w-full focus:outline-none text-sm selected-none"
+          className="w-full focus:outline-none text-sm"
           value={searchText}
           onChange={(e) => setSearchText(e.target.value)}
         />
@@ -150,28 +154,25 @@ export default function MultiSelect({
     if (label) {
       return <p className="text-gray-700">{label}</p>;
     }
-    return <></>;
+    return null;
   };
 
   const renderRequired = () => {
     if (required) {
       return <p className="text-primary-500 font-bold">*</p>;
     }
-    return <></>;
+    return null;
   };
 
   const getFilteredOptions = () => {
-    // 검색어를 소문자로 변환
     const searchTerm = searchText.toLowerCase();
 
-    // 선택된 값과 검색어가 포함된 옵션 필터링
     const filtered = options.filter((option) => {
       const isOptionSelected = selected.includes(option.value);
       const matchesSearch = option.label.toLowerCase().includes(searchTerm);
       return !isOptionSelected && matchesSearch;
     });
 
-    // 선택된 값은 검색 결과 앞에 추가하여 보여줌
     const selectedOptions = options.filter((option) =>
       selected.includes(option.value)
     );
@@ -183,7 +184,7 @@ export default function MultiSelect({
     const optionPosition = position === "top" ? "bottom-full" : "top-full";
 
     const optionStyle = (option: IOption) => {
-      const basic = "px-2 py-2 cursor-pointer rounded-md";
+      const basic = "px-2 py-2 cursor-pointer rounded-md select-none text-sm";
 
       const isSelected = selected.some(
         (selectedOption) => selectedOption === option.value
@@ -218,13 +219,13 @@ export default function MultiSelect({
 
   return (
     <div className="flex flex-col gap-2" ref={ref}>
-      <div className="flex gap-1">
+      <div className="flex gap-1 select-none">
         {renderLabel()}
         {renderRequired()}
       </div>
       <div className="relative w-full">
         <div onClick={toggleDropdown} className={boxStyle()} aria-hidden="true">
-          <div>{valueList()}</div>
+          <div className="select-none text-sm">{valueList()}</div>
           <div>{icon()}</div>
         </div>
         {isOpen && renderOptions()}
