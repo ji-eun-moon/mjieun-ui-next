@@ -32,25 +32,25 @@ export function DialogProvider({ children }: { children: React.ReactNode }) {
         return {
           type: "alert",
           props: props as AlertProps,
-          id: `${type}${id}`,
+          id,
         };
       case "confirm":
         return {
           type: "confirm",
           props: props as ConfirmProps,
-          id: `${type}${id}`,
+          id,
         };
       case "modal":
         return {
           type: "modal",
           props: props as ModalProps,
-          id: `${type}${id}`,
+          id,
         };
       case "sideDialog":
         return {
           type: "sideDialog",
           props: props as SideDialogProps,
-          id: `${type}${id}`,
+          id,
         };
       default:
         throw new Error(`Invalid dialog type: ${type}`);

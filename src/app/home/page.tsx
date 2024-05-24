@@ -1,56 +1,64 @@
 "use client";
 import React, { useState } from "react";
-import Select from "@/components/common/Select";
-import MultiSelect from "@/components/common/MultiSelect";
-import Segment from "@/components/common/Segment";
+import { DialogProvider, useDialog } from "@/hooks/useDialog";
+import Button from "@/components/common/Button";
+import {
+  AlertProps,
+  ConfirmProps,
+  DialogType,
+  SideDialogProps,
+} from "@/types/props/DialogProps";
 
 function HomePage() {
-  const [value, setValue] = useState<string>("");
-  const [selected, setSelected] = useState<string[]>([]);
+  const { show } = useDialog();
 
-  const options = [
-    { label: "서울특별시", value: "Seoul" },
-    { label: "부산광역시", value: "Busan" },
-    { label: "인천광역시", value: "Incheon" },
-    { label: "대구광역시", value: "Daegu" },
-    { label: "대전광역시", value: "Daejeon" },
-    { label: "광주광역시", value: "Gwangju" },
-    { label: "울산광역시", value: "Ulsan" },
-    { label: "세종특별자치시", value: "Sejong" },
-    { label: "경기도", value: "Gyeonggi" },
-    { label: "경상남도", value: "Gyeongsangnam" },
-    { label: "경상북도", value: "Gyeongsangbuk" },
-    { label: "충청남도", value: "Chungcheongnam" },
-    { label: "충청북도", value: "Chungcheongbuk" },
-    { label: "전라남도", value: "Jeollanam" },
-    { label: "전라북도", value: "Jeollabuk" },
-    { label: "강원도", value: "Gangwon" },
-    { label: "제주도", value: "Jeju" },
-  ];
+  const handleOpenAlert = () => {
+    const dialogData: DialogType = {
+      type: "alert",
+      props: {
+        type: "success",
+        message: "This is a success message!",
+      } as AlertProps,
+    };
+    show(dialogData);
+  };
+
+  const handleOpenConfirm = () => {
+    const dialogData: DialogType = {
+      type: "confirm",
+      props: {
+        title: "게시글 삭제",
+        message: "정말 삭제하시겠습니까?",
+        onConfirm: handleOpenAlert,
+      } as ConfirmProps,
+    };
+    show(dialogData);
+  };
+
+  const handleOpenSideDialog = () => {
+    const KEY = Math.random().toString(36).substring(2);
+    const dialogData: DialogType = {
+      type: "sideDialog",
+      props: {
+        title: "Title",
+        body: (
+          <div className="w-96">
+            {KEY} 새로운 다이얼로그
+            <Button onClick={handleOpenAlert}>알림창 열기</Button>
+          </div>
+        ),
+        onButton: handleOpenSideDialog,
+        buttonLabel: "하나 더열기",
+      } as SideDialogProps,
+    };
+    show(dialogData);
+  };
+
   return (
-    <div className="w-fit m-16">
-      <div className="w-56">
-        <Select
-          options={options}
-          selected={value}
-          onChange={setValue}
-          placeholder="지역을 선택해주세요."
-        />
-      </div>
-      <MultiSelect
-        options={options}
-        selected={selected}
-        onChange={setSelected}
-        placeholder="지역을 선택해주세요."
-      />
-      <Segment
-        items={[
-          { id: "1", name: "Tab 1", content: "Content 1" },
-          { id: "2", name: "Tab 2", content: "Content 2" },
-          { id: "3", name: "Tab 3", content: "Content 3" },
-          { id: "4", name: "Tab 4", content: "Content 4" },
-        ]}
-      />
+    <div>
+      <Button onClick={handleOpenAlert}>Open Alert</Button>
+      <Button onClick={handleOpenConfirm}>Open Confirm</Button>
+      <Button onClick={handleOpenSideDialog}>Open SideDialog</Button>
     </div>
   );
 }

@@ -35,6 +35,7 @@ export interface ButtonProps {
   expand?: boolean;
   icon?: string;
   radius?: "sm" | "md" | "lg" | "xl" | "full";
+  onClick: (event: React.MouseEvent<any>) => void;
 }
 
 /**
@@ -47,6 +48,7 @@ export interface ButtonProps {
  * @param type 버튼 타입
  * @param expand 버튼 확장 여부
  * @param icon 버튼에 들어갈 아이콘
+ * @param onClick 버튼 클릭 시 실행할 함수
  */
 
 export default function Button({
@@ -58,6 +60,7 @@ export default function Button({
   disabled = false,
   radius = "md",
   icon = "",
+  onClick,
 }: ButtonProps) {
   const styles: Style = {
     solid: {
@@ -122,7 +125,12 @@ export default function Button({
   };
 
   return (
-    <button type={type} className={buttonClass()} disabled={disabled}>
+    <button
+      type={type}
+      className={buttonClass()}
+      disabled={disabled}
+      onClick={onClick}
+    >
       {icon && <Icon name={icon} size={16} color={iconColor()} />}
       {children}
     </button>
