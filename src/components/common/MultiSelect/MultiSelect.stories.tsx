@@ -49,6 +49,13 @@ const meta: Meta<typeof MultiSelect> = {
       description: "값을 추가/변경할 함수",
     },
   },
+  parameters: {
+    docs: {
+      story: {
+        height: "300px",
+      },
+    },
+  },
 };
 export default meta;
 type Story = StoryObj<typeof MultiSelect>;

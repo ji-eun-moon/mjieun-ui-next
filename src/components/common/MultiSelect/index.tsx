@@ -53,7 +53,8 @@ export default function MultiSelect({
     setIsOpen(false);
   });
 
-  const toggleDropdown = () => {
+  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
     if (search) {
       setIsOpen(true);
     } else {

@@ -60,9 +60,14 @@ export default function Select({
     setSearchText(option.label);
   };
 
-  const toggleDropdown = () => {
-    if (!disabled) {
-      setIsOpen(!isOpen);
+  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
+    e.stopPropagation();
+    if (search) {
+      setIsOpen(true);
+    } else {
+      if (!disabled) {
+        setIsOpen(!isOpen);
+      }
     }
   };
 
