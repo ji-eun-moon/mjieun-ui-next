@@ -1,8 +1,9 @@
 "use client";
-import { useEffect, useState } from "react";
+import { useOutsideClick } from "@/hooks/useOutsideClick";
+import React, { useState } from "react";
 import Icon from "../Icon";
 import classNames from "classnames";
-import { useOutsideClick } from "@/hooks/useOutsideClick";
+import Label from "../Label";
 
 interface IOption {
   label: string;
@@ -52,8 +53,7 @@ export default function MultiSelect({
     setIsOpen(false);
   });
 
-  const toggleDropdown = (e: React.MouseEvent<HTMLDivElement>) => {
-    e.stopPropagation();
+  const toggleDropdown = () => {
     if (search) {
       setIsOpen(true);
     } else {
@@ -80,15 +80,16 @@ export default function MultiSelect({
 
   const boxStyle = () => {
     const basic =
-      "flex gap-2 items-center justify-between px-2 py-2 rounded-md border-2 hover:border-primary-300 bg-white text-black font-medium cursor-pointer";
+      "flex gap-2 items-center justify-between px-3 py-2 rounded-md border-2 hover:border-primary-300 text-black font-medium cursor-pointer";
     const openStyle = "border-primary-300";
     const closeStyle = "border-gray-300";
-    const disabledStyle = "opacity-50 pointer-events-none";
+    const activeStype = "bg-white";
+    const disabledStyle = "pointer-events-none bg-gray-100";
 
     return classNames(
       basic,
       isOpen ? openStyle : closeStyle,
-      disabled && disabledStyle
+      disabled ? disabledStyle : activeStype
     );
   };
 
@@ -100,8 +101,8 @@ export default function MultiSelect({
         <Icon
           name="mdi:chevron-down"
           size={16}
-          color="primary-400"
-          className="hover:text-primary-500"
+          color="gray-300"
+          className={`${!disabled && "group-hover:text-primary-500"}`}
         />
       );
     }
@@ -147,21 +148,7 @@ export default function MultiSelect({
         />
       );
     }
-    return placeholder;
-  };
-
-  const renderLabel = () => {
-    if (label) {
-      return <p className="text-gray-700">{label}</p>;
-    }
-    return null;
-  };
-
-  const renderRequired = () => {
-    if (required) {
-      return <p className="text-primary-500 font-bold">*</p>;
-    }
-    return null;
+    return <p className="select-none text-sm text-gray-400">{placeholder}</p>;
   };
 
   const getFilteredOptions = () => {
@@ -184,7 +171,7 @@ export default function MultiSelect({
     const optionPosition = position === "top" ? "bottom-full" : "top-full";
 
     const optionStyle = (option: IOption) => {
-      const basic = "px-2 py-2 cursor-pointer rounded-md select-none text-sm";
+      const basic = "cursor-pointer rounded-md select-none text-sm";
 
       const isSelected = selected.some(
         (selectedOption) => selectedOption === option.value
@@ -202,31 +189,34 @@ export default function MultiSelect({
 
     return (
       <div
-        className={`max-h-[200px] overflow-y-auto absolute left-0 w-full border-2 border-gray-300 rounded-md bg-white z-10 flex flex-col gap-1 ${optionPosition}`}
+        className={`p-2 max-h-[200px] overflow-y-auto absolute left-0 w-full shadow-md rounded-md bg-white z-10 flex flex-col gap-1 ${optionPosition}`}
       >
-        {filteredOptions.map((option) => (
-          <p
-            key={option.value}
-            onClick={(e) => handleItemClick(option, e)}
-            className={optionStyle(option)}
-          >
-            {option.label}
-          </p>
-        ))}
+        {filteredOptions.length > 0 ? (
+          filteredOptions.map((option) => (
+            <div className={optionStyle(option)} key={option.value}>
+              <p
+                key={option.value}
+                onClick={(e) => handleItemClick(option, e)}
+                className="p-3 text-sm rounded cursor-pointer"
+              >
+                {option.label}
+              </p>
+            </div>
+          ))
+        ) : (
+          <p className="p-3 text-sm text-gray-400">항목이 존재하지 않습니다.</p>
+        )}
       </div>
     );
   };
 
   return (
-    <div className="flex flex-col gap-2" ref={ref}>
-      <div className="flex gap-1 select-none">
-        {renderLabel()}
-        {renderRequired()}
-      </div>
+    <div className="flex flex-col gap-2 group" ref={ref}>
+      {label && <Label label={label} required={required} />}
       <div className="relative w-full">
         <div onClick={toggleDropdown} className={boxStyle()} aria-hidden="true">
-          <div className="select-none text-sm">{valueList()}</div>
-          <div>{icon()}</div>
+          <div className="select-none text-sm w-full">{valueList()}</div>
+          {icon()}
         </div>
         {isOpen && renderOptions()}
       </div>
