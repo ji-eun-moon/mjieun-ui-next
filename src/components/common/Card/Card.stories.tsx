@@ -41,8 +41,7 @@ const meta: Meta<typeof Card> = {
       options: ["primary", "danger", "success", "warning", "dark"],
     },
     options: {
-      description:
-        "우클릭시 나타나는 옵션 배열(우클릭 드롭다운이 스토리북에서는 오류 있으나 애플리케이션에서는 정상 작동합니다.)",
+      description: "우클릭시 나타나는 옵션 배열",
       table: {
         type: {
           summary: "DropDownItem[]",

@@ -35,6 +35,7 @@ export default function DropDown({
 }: Props) {
   const dropdownRef = useRef(null);
   const [clicked, setClicked] = useDetectClick(dropdownRef, false);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   const groupedItems = items.reduce((groups, item) => {
     const { group = "" } = item;
@@ -58,10 +59,19 @@ export default function DropDown({
       e.stopPropagation();
       e.preventDefault();
       setClicked(!clicked);
+
       const { clientX, clientY } = e;
-      if (dropdownRef.current) {
-        dropdownRef.current.style.left = `${clientX}px`;
-        dropdownRef.current.style.top = `${clientY}px`;
+      const dropdown = dropdownRef.current;
+      const container = containerRef.current;
+
+      if (dropdown && container) {
+        const containerRect = container.getBoundingClientRect();
+
+        const left = clientX - containerRect.left;
+        const top = clientY - containerRect.top;
+
+        dropdown.style.left = `${left}px`;
+        dropdown.style.top = `${top}px`;
       }
     }
   };
@@ -88,7 +98,7 @@ export default function DropDown({
   };
 
   return (
-    <div className="w-full relative">
+    <div ref={containerRef} className="w-full relative">
       <div
         onClick={clickLeft}
         onContextMenu={clickRight}
