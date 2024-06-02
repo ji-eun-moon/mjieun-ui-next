@@ -20,7 +20,10 @@ const config: StorybookConfig = {
   staticDirs: ["../public"],
   webpackFinal: async (config) => {
     if (config.resolve && config.resolve.alias) {
-      config.resolve.alias["@"] = path.resolve(__dirname, "../src");
+      config.resolve.alias = {
+        "@": path.resolve(__dirname, "../src"),
+        "next/image": require.resolve("./__mocks__/NextJSImageMock.js"),
+      };
     }
     return config;
   },

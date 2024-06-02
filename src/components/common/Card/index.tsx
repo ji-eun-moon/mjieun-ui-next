@@ -54,13 +54,19 @@ export default function Card({
     if (img) {
       return (
         <div>
-          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-black/50" />
-          <Image src={img} alt="image" layout="fill" objectFit="cover" />
+          <div className="absolute" />
+          <Image
+            src={img}
+            alt="image"
+            layout="fill"
+            objectFit="cover"
+            className="rounded-lg"
+          />
         </div>
       );
     }
     return (
-      <div className="w-full bg-gray-300 h-48 rounded-lg flex justify-center items-center max-w-[17.5rem] min-w-[15rem]">
+      <div className="w-full bg-gray-300 h-40 rounded-lg flex justify-center items-center">
         <Icon name="tabler:photo" color="gray-500" />
       </div>
     );
