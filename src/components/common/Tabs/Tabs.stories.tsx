@@ -1,10 +1,10 @@
 import type { Meta, StoryObj } from "@storybook/react";
-import Segment from ".";
+import Tabs from ".";
 import { useState } from "@storybook/preview-api";
 
-const meta: Meta<typeof Segment> = {
-  component: Segment,
-  title: "Components/Segment",
+const meta: Meta<typeof Tabs> = {
+  component: Tabs,
+  title: "Components/Tabs",
   tags: ["autodocs"],
   argTypes: {
     items: {
@@ -24,7 +24,7 @@ const meta: Meta<typeof Segment> = {
 };
 export default meta;
 
-type Story = StoryObj<typeof Segment>;
+type Story = StoryObj<typeof Tabs>;
 
 export const Default: Story = {
   args: {
@@ -37,7 +37,7 @@ export const Default: Story = {
   },
   render: function Render(args) {
     const [selected, setSelected] = useState<string>("");
-    return <Segment {...args} onChange={setSelected} />;
+    return <Tabs {...args} onChange={setSelected} />;
   },
 };
 
@@ -52,7 +52,7 @@ export const WithIcon: Story = {
   },
   render: function Render(args) {
     const [selected, setSelected] = useState<string>("");
-    return <Segment {...args} onChange={setSelected} />;
+    return <Tabs {...args} onChange={setSelected} />;
   },
 };
 
@@ -87,6 +87,6 @@ export const WithItemLength: Story = {
   },
   render: function Render(args) {
     const [selected, setSelected] = useState<string>("");
-    return <Segment {...args} onChange={setSelected} />;
+    return <Tabs {...args} onChange={setSelected} />;
   },
 };

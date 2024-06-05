@@ -1,7 +1,6 @@
-import classNames from 'classnames';
-import React, { useRef, useState, useEffect } from 'react';
-import Icon from '../Icon';
-
+import classNames from "classnames";
+import React, { useRef, useState, useEffect } from "react";
+import Icon from "../Icon";
 
 interface IItem {
   id: string;
@@ -19,7 +18,7 @@ interface Props {
  * 세그먼트 컴포넌트
  * @param items 아이템 리스트
  */
-export default function Segment({ items, onChange }: Props) {
+export default function Tabs({ items, onChange }: Props) {
   const activeRef = useRef<HTMLDivElement>(null);
   const [selected, setSelected] = useState<string>(items[0].id);
   const [offset, setOffset] = useState<number>(0);
@@ -41,10 +40,13 @@ export default function Segment({ items, onChange }: Props) {
   const itemStyle = (item: IItem) => {
     const isSelected = selected === item.id;
     const basicStyle =
-      'inline-block px-4 py-2 cursor-pointer select-none rounded-md hover:bg-gray-50 font-semibold';
-    const selectedStyle = 'text-gray-700';
-    const notSelectedStyle = 'text-gray-500';
-    return classNames(basicStyle, isSelected ? selectedStyle : notSelectedStyle);
+      "inline-block px-4 py-2 cursor-pointer select-none rounded-md hover:bg-gray-50 font-semibold";
+    const selectedStyle = "text-gray-700";
+    const notSelectedStyle = "text-gray-500";
+    return classNames(
+      basicStyle,
+      isSelected ? selectedStyle : notSelectedStyle
+    );
   };
 
   const renderIcon = (item: IItem) => {
