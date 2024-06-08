@@ -1,0 +1,108 @@
+$border-color: #e5e5e5;
+$header-background-color: #fafafa;
+$table-padding: 8px;
+
+.horizontal-headings {
+  width: 100%;
+  table {
+    width: 100%;
+    thead {
+      width: 100%;
+      tr {
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        th {
+          background-color: $header-background-color;
+          padding: $table-padding;
+          text-align: center;
+          border-right: 1px solid $border-color;
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+    tbody {
+      width: 100%;
+      tr {
+        border-bottom: 1px solid $border-color;
+        td {
+          padding: $table-padding;
+          text-align: center;
+          border-right: 1px solid $border-color;
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.vertical-headings {
+  width: 100%;
+  table {
+    width: 100%;
+    tbody {
+      tr {
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        th {
+          width: 50%;
+          padding: $table-padding;
+          border-right: 1px solid $border-color;
+          background: $header-background-color;
+        }
+        td {
+          padding: $table-padding;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
+
+.multi-headings {
+  width: 100%;
+  table {
+    width: 100%;
+    thead {
+      tr {
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        th {
+          width: 50%;
+          padding: $table-padding;
+          background: $header-background-color;
+          border-top: 1px solid $border-color;
+          border-bottom: 1px solid $border-color;
+          border-right: 1px solid $border-color;
+          &:last-child {
+            border: none;
+          }
+        }
+      }
+    }
+    tbody {
+      tr {
+        border-top: 1px solid $border-color;
+        border-bottom: 1px solid $border-color;
+        th {
+          width: 50%;
+          padding: $table-padding;
+          background: $header-background-color;
+          border-top: 1px solid $border-color;
+          border-bottom: 1px solid $border-color;
+          border-right: 1px solid $border-color;
+          &:last-child {
+            border: none;
+          }
+        }
+        td {
+          padding: $table-padding;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
